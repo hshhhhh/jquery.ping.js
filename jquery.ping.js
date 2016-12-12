@@ -5,8 +5,8 @@
  * @version   0.0.1
  * @date      2016-11-10
  * @license   DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- * @homepage  
- * @example   
+ * @homepage  https://github.com/hshhhhh/jquery.ping.js
+ * @example   https://github.com/hshhhhh/jquery.ping.js
  */
 (function( $ ) {
     // plugin name
@@ -82,7 +82,7 @@
     {
         var e_ping = $(this);
 
-        // Label : "ping ~42"
+        // Label : "ping ~42ms"
         var s_text = 'ping ~' + i_ms + 'ms'
         e_ping.html(s_text)
 
@@ -188,8 +188,3 @@
 		 *
 		 * @return Size (in pixels) that the font can be resized.
 		 */
-
-
-
-
-
