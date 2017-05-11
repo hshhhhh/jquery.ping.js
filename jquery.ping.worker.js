@@ -1,5 +1,6 @@
 ﻿var peers = [];
 
+// @FIXME attach handler by event!
 onconnect = function(e) {
     var port = e.ports[0];
     peers.push(port);
@@ -15,11 +16,11 @@ onconnect = function(e) {
 
         switch (data_in.event) {
             case 'start':
-				methods.start.apply(this, [data_in.data.endpoint])
+                methods.start.apply(this, [data_in.data.endpoint])
                 break
 
             case 'pause':
-				methods.pause.apply(this, [data_in.data.endpoint])
+                methods.pause.apply(this)
                 break
         }
 
@@ -51,8 +52,8 @@ var methods = {
             return false;
         }
         interval_id = setInterval(methods.request.bind(this, endpoint), (interval || 1000))
-		methods.message([endpoint, interval, interval_id])
-		methods.message('started?')
+        methods.message([endpoint, interval, interval_id])
+        methods.message('started?')
         return true
     },
 
@@ -61,7 +62,7 @@ var methods = {
             clearInterval(interval_id)
             interval_id = null
         }
-		methods.message('paused?')
+        methods.message('paused?')
         return true
     },
 
@@ -73,9 +74,9 @@ var methods = {
 
         var i_start = +(new Date())
         httpRequest.onreadystatechange = function () {
-			if (httpRequest.readyState !== XMLHttpRequest.DONE) {
-				return;
-			}
+            if (httpRequest.readyState !== XMLHttpRequest.DONE) {
+                return;
+            }
             var i_end = +(new Date())
             var i_duration  = i_end - i_start
             methods.message({'event': 'update', 'start': i_start, 'duration' : i_duration, 'peers': peers.length, 'i': i++})
